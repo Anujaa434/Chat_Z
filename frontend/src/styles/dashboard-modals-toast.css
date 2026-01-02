@@ -1,0 +1,851 @@
+/* Modals */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.dashboard-root.light .modal-overlay {
+  background: rgba(15, 23, 42, 0.55);
+}
+
+.modal {
+  width: 100%;
+  max-width: 380px;
+  border-radius: 18px;
+  background: #050816;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  padding: 16px 16px 14px;
+  box-shadow: 0 24px 55px rgba(15, 23, 42, 0.95);
+}
+
+.dashboard-root.light .modal {
+  background: #ffffff;
+  border-color: #e5e7eb;
+  box-shadow: 0 24px 55px rgba(15, 23, 42, 0.25);
+}
+
+.modal-title {
+  font-size: 15px;
+  font-weight: 650;
+  margin-bottom: 10px;
+}
+
+.modal-input {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  background: rgba(15, 23, 42, 0.95);
+  color: #e5e7eb;
+  padding: 8px 10px;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.dashboard-root.light .modal-input {
+  background: #f9fafb;
+  color: #111827;
+  border-color: #d1d5db;
+}
+
+.modal-textarea {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  background: rgba(15, 23, 42, 0.95);
+  color: #e5e7eb;
+  padding: 10px 12px;
+  font-size: 13px;
+  margin-bottom: 12px;
+  resize: vertical;
+}
+
+.dashboard-root.light .modal-textarea {
+  background: #f9fafb;
+  color: #111827;
+  border-color: #d1d5db;
+}
+
+.modal-subtitle {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #9ca3af;
+  margin-bottom: 6px;
+}
+
+.dashboard-root.light .modal-subtitle {
+  color: #6b7280;
+}
+
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.color-grid-small {
+  margin-bottom: 0;
+}
+
+.color-option {
+  border-radius: 8px;
+  aspect-ratio: 1 / 1;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+.color-option.selected {
+  border-color: #fff;
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.7);
+}
+
+.dashboard-root.light .color-option.selected {
+  border-color: #111827;
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.7);
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.modal-btn {
+  flex: 1;
+  border-radius: 999px;
+  border: none;
+  padding: 7px 0;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.16s;
+}
+
+.modal-btn.cancel {
+  background: rgba(15, 23, 42, 0.95);
+  color: #e5e7eb;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+}
+
+.modal-btn.create {
+  background: #1d4ed8;
+  color: #f9fafb;
+}
+
+.dashboard-root.light .modal-btn.cancel {
+  background: #f3f4f6;
+  color: #111827;
+  border-color: #d1d5db;
+}
+
+.modal-btn:hover {
+  transform: translateY(-1px);
+}
+
+/* Bigger modal for note editor (not used as popup now) */
+
+.note-editor-modal {
+  max-width: 540px;
+}
+
+/* ===================== TOAST: PIN LIMIT ===================== */
+
+.pin-limit-toast {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.pin-limit-toast-inner {
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px 32px;
+  border-radius: 16px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(20, 30, 50, 0.95) 100%);
+  box-shadow: 
+    0 20px 60px rgba(15, 23, 42, 0.9),
+    0 0 1px rgba(148, 163, 184, 0.3) inset,
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  color: #e5e7eb;
+  min-width: 280px;
+}
+
+.pin-limit-text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: center;
+}
+
+.pin-limit-title {
+  font-weight: 700;
+  font-size: 15px;
+  color: #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  letter-spacing: -0.3px;
+}
+
+.pin-limit-message {
+  font-size: 13px;
+  opacity: 0.8;
+  color: #cbd5e1;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+/* Light theme version */
+.dashboard-root.light .pin-limit-toast-inner {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(249, 250, 251, 0.95) 100%);
+  border-color: rgba(209, 213, 219, 0.5);
+  box-shadow: 
+    0 20px 60px rgba(15, 23, 42, 0.1),
+    0 0 1px rgba(209, 213, 219, 0.3) inset,
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  color: #111827;
+}
+
+.dashboard-root.light .pin-limit-title {
+  color: #111827;
+}
+
+.dashboard-root.light .pin-limit-message {
+  color: #6b7280;
+}
+
+/* ===================== MODAL DIALOG (RENAME CHAT) ===================== */
+
+.modal-dialog {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 18px;
+  background: #050816;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  box-shadow: 0 24px 55px rgba(15, 23, 42, 0.95);
+  overflow: hidden;
+}
+
+.dashboard-root.light .modal-dialog {
+  background: #ffffff;
+  border-color: #e5e7eb;
+  box-shadow: 0 24px 55px rgba(15, 23, 42, 0.25);
+}
+
+.modal-header {
+  padding: 20px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+.dashboard-root.light .modal-header {
+  border-bottom-color: #e5e7eb;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 650;
+  color: #e5e7eb;
+}
+
+.dashboard-root.light .modal-header h2 {
+  color: #111827;
+}
+
+.modal-body {
+  padding: 14px;
+  color: #e5e7eb;
+}
+
+.modal-dialog.add-files-modal {
+  max-width: 440px;
+}
+
+.modal-dialog.add-files-modal .modal-header {
+  padding: 12px 14px 8px;
+}
+
+.modal-dialog.add-files-modal .modal-header .modal-subtitle,
+.modal-dialog.add-files-modal .modal-header p {
+  margin-top: 4px;
+  color: #94a3b8;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.modal-dialog.add-files-modal .modal-body {
+  padding: 8px 12px 10px;
+}
+
+.modal-dialog.add-files-modal .modal-footer {
+  padding: 8px 12px;
+  gap: 8px;
+}
+
+.modal-dialog.add-files-modal .modal-footer .btn-save,
+.modal-dialog.add-files-modal .modal-footer .btn-cancel {
+  height: 32px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.modal-dialog.add-files-modal .modal-footer .btn-save {
+  background: #e5e7eb;
+  color: #0f172a;
+  border: 1px solid rgba(148, 163, 184, 0.55);
+  box-shadow: none;
+}
+
+.modal-dialog.add-files-modal .modal-footer .btn-save:hover {
+  background: #cbd5e1;
+  border-color: rgba(148, 163, 184, 0.75);
+}
+
+.modal-dialog.add-files-modal .modal-footer .btn-cancel {
+  background: transparent;
+  color: #cbd5e1;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+}
+
+.modal-dialog.add-files-modal .modal-footer .btn-cancel:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(148, 163, 184, 0.55);
+}
+
+.dashboard-root.light .modal-dialog.add-files-modal .modal-footer .btn-save {
+  background: #ffffff;
+  color: #0f172a;
+  border: 1px solid #e5e7eb;
+}
+
+.dashboard-root.light .modal-dialog.add-files-modal .modal-footer .btn-save:hover {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+.dashboard-root.light .modal-dialog.add-files-modal .modal-footer .btn-cancel {
+  color: #475569;
+  border-color: #e2e8f0;
+}
+
+.dashboard-root.light .modal-dialog.add-files-modal .modal-footer .btn-cancel:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.add-files-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 320px;
+  overflow-y: auto;
+  align-items: flex-start;
+}
+
+.add-file-row {
+  display: flex;
+  gap: 10px;
+  padding: 7px 9px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 8px;
+  align-items: center;
+  width: 96%;
+  margin: 0 auto;
+}
+
+.add-file-row input[type="checkbox"] {
+  margin-top: 2px;
+  accent-color: #0b0b0b;
+}
+
+.add-file-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.add-file-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #f8fafc;
+}
+
+.empty-state.compact {
+  padding: 10px 12px;
+  border-radius: 10px;
+}
+
+.dashboard-root.light .add-file-row {
+  background: #f8fafc;
+  border-color: #e5e7eb;
+}
+
+.dashboard-root.light .add-file-title {
+  color: #0f172a;
+}
+
+.dashboard-root.light .add-file-preview {
+  color: #475569;
+}
+
+.dashboard-root.light .modal-body {
+  color: #000000;
+}
+
+.modal-body p {
+  color: inherit;
+  font-weight: 400;
+}
+
+.form-group {
+  margin-bottom: 12px;
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+.form-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #cbd5e1;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.dashboard-root.light .form-group label {
+  color: #374151;
+}
+
+.form-group .modal-input,
+.form-group .modal-textarea {
+  margin-bottom: 0;
+}
+
+.form-group .modal-textarea {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.4;
+}
+
+.modal-footer {
+  padding: 16px 20px;
+  border-top: 1px solid rgba(148, 163, 184, 0.3);
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.dashboard-root.light .modal-footer {
+  border-top-color: #e5e7eb;
+}
+
+.btn-cancel,
+.btn-save {
+  padding: 9px 24px;
+  border-radius: 999px;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.16s;
+}
+
+.btn-cancel {
+  background: rgba(15, 23, 42, 0.95);
+  color: #e5e7eb;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+}
+
+.dashboard-root.light .btn-cancel {
+  background: #f3f4f6;
+  color: #111827;
+  border-color: #d1d5db;
+}
+
+.dashboard-root.light .btn-cancel:hover {
+  background: #eef2ff;
+  border-color: #c7d2fe;
+}
+
+.btn-save {
+  background: #1d4ed8;
+  color: #f9fafb;
+}
+
+.btn-save:hover:not(:disabled) {
+  background: #2563eb;
+  transform: translateY(-1px);
+}
+
+.btn-save:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-cancel:hover {
+  transform: translateY(-1px);
+  background: rgba(148, 163, 184, 0.14);
+  border-color: rgba(148, 163, 184, 0.75);
+}
+
+/* Color Picker for Modals */
+.color-picker {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.color-picker-compact {
+  gap: 8px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.color-option {
+  border-radius: 10px;
+  aspect-ratio: 1 / 1;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+.color-option:hover {
+  transform: scale(1.05);
+}
+
+.color-option.selected {
+  border-color: #fff;
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.7);
+}
+
+.dashboard-root.light .color-option.selected {
+  border-color: #111827;
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.7);
+}
+
+/* Note Selection in Folder Modal */
+.note-selection-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  border-radius: 10px;
+  background: rgba(148, 163, 184, 0.08);
+  color: #e5e7eb;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dashboard-root.light .note-selection-toggle {
+  background: rgba(148, 163, 184, 0.05);
+  border-color: #d1d5db;
+  color: #1f2937;
+}
+
+.note-selection-toggle:hover {
+  background: rgba(148, 163, 184, 0.12);
+  border-color: rgba(148, 163, 184, 0.7);
+}
+
+.dashboard-root.light .note-selection-toggle:hover {
+  background: rgba(148, 163, 184, 0.1);
+  border-color: #9ca3af;
+}
+
+.toggle-icon {
+  display: inline-flex;
+  margin-right: 8px;
+  font-size: 10px;
+}
+
+.selection-count {
+  margin-left: auto;
+  background: rgba(56, 189, 248, 0.2);
+  color: #38bdf8;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.note-selection-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.action-btn {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  border-radius: 8px;
+  background: rgba(56, 189, 248, 0.1);
+  color: #38bdf8;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dashboard-root.light .action-btn {
+  background: rgba(56, 189, 248, 0.08);
+  border-color: #bfdbfe;
+  color: #0369a1;
+}
+
+.action-btn:hover {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: rgba(56, 189, 248, 0.7);
+}
+
+.dashboard-root.light .action-btn:hover {
+  background: rgba(56, 189, 248, 0.15);
+  border-color: #93c5fd;
+}
+
+.action-btn.clear {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
+.dashboard-root.light .action-btn.clear {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: #fecaca;
+  color: #991b1b;
+}
+
+.action-btn.clear:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.7);
+}
+
+.dashboard-root.light .action-btn.clear:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: #fca5a5;
+}
+
+.note-selection-container {
+  margin-top: 12px;
+  padding: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 10px;
+  background: rgba(148, 163, 184, 0.05);
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.dashboard-root.light .note-selection-container {
+  background: rgba(148, 163, 184, 0.03);
+  border-color: #e5e7eb;
+}
+
+.notes-list-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.note-item-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 6px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.note-item-checkbox:hover {
+  background-color: rgba(148, 163, 184, 0.1);
+}
+
+.dashboard-root.light .note-item-checkbox:hover {
+  background-color: rgba(148, 163, 184, 0.05);
+}
+
+.checkbox-input {
+  width: 16px;
+  height: 16px;
+  margin-top: 3px;
+  cursor: pointer;
+  accent-color: #38bdf8;
+  flex-shrink: 0;
+}
+
+.checkbox-label {
+  flex: 1;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.note-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: #e5e7eb;
+  line-height: 1.2;
+}
+
+.dashboard-root.light .note-title {
+  color: #1f2937;
+}
+
+.note-preview {
+  font-size: 11px;
+  color: #94a3b8;
+  line-height: 1.2;
+}
+
+.dashboard-root.light .note-preview {
+  color: #6b7280;
+}
+
+.empty-notes-message {
+  text-align: center;
+  padding: 20px 12px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.dashboard-root.light .empty-notes-message {
+  color: #9ca3af;
+}
+
+/* Move Note Modal */
+.note-preview-container {
+  margin-top: 16px;
+  padding: 12px;
+  background: rgba(148, 163, 184, 0.08);
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.dashboard-root.light .note-preview-container {
+  background: rgba(148, 163, 184, 0.05);
+  border-color: #e5e7eb;
+}
+
+.note-preview-label {
+  font-size: 11px;
+  color: #94a3b8;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.dashboard-root.light .note-preview-label {
+  color: #6b7280;
+}
+
+.note-preview-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: #e5e7eb;
+  margin: 0;
+}
+
+/* ===== Delete Confirmation Modal ===== */
+.modal-dialog.delete-confirm {
+  max-width: 320px;
+}
+
+.modal-dialog.delete-confirm .modal-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.modal-dialog.delete-confirm .modal-header h2 {
+  font-size: 14px;
+  margin: 0;
+}
+
+.modal-dialog.delete-confirm .modal-body {
+  padding: 12px 16px;
+}
+
+.modal-dialog.delete-confirm .modal-body p {
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 0;
+  color: #cbd5e1;
+}
+
+.dashboard-root.light .modal-dialog.delete-confirm .modal-body p {
+  color: #6b7280;
+}
+
+.modal-dialog.delete-confirm .modal-footer {
+  padding: 10px 16px;
+  border-top: 1px solid rgba(148, 163, 184, 0.2);
+  gap: 6px;
+}
+
+.modal-dialog.delete-confirm .btn-cancel,
+.modal-dialog.delete-confirm .btn-delete {
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+.modal-dialog.delete-confirm .btn-delete {
+  background: #b91c1c;
+  color: #fff;
+  border: none;
+  font-weight: 600;
+}
+
+.modal-dialog.delete-confirm .btn-delete:hover {
+  background: #7f1d1d;
+  transform: none;
+}
+
+.dashboard-root.light .modal-dialog.delete-confirm .modal-header {
+  border-bottom-color: #e5e7eb;
+}
+
+.dashboard-root.light .modal-dialog.delete-confirm .modal-footer {
+  border-top-color: #e5e7eb;
+}
+
+.dashboard-root.light .note-preview-title {
+  color: #1f2937;
+}
+

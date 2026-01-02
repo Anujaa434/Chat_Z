@@ -1,0 +1,540 @@
+/* ===== Note Editor – flowing textpad (right area only) ===== */
+
+.notes-main-split {
+  display: flex;
+  gap: 14px;
+  height: 100%;
+  transition: padding 0.18s ease, margin 0.18s ease;
+}
+
+.notes-list-pane {
+  width: 40%;
+  min-width: 260px;
+  border-right: 1px solid rgba(148, 163, 184, 0.35);
+  padding-right: 10px;
+  margin-right: 4px;
+  overflow-y: auto;
+}
+
+/* Extra breathing room when sidebar is collapsed */
+.dashboard-root.sidebar-collapsed .notes-main-split {
+  padding-left: 12px;
+}
+
+.dashboard-root.sidebar-collapsed .notes-list-pane {
+  padding-left: 8px;
+  margin-left: 4px;
+}
+
+.notes-list-pane::-webkit-scrollbar {
+  width: 6px;
+}
+.notes-list-pane::-webkit-scrollbar-thumb {
+  background: rgba(51, 65, 85, 0.85);
+  border-radius: 3px;
+}
+
+.dashboard-root.light .notes-list-pane {
+  border-right-color: #e5e7eb;
+}
+
+.dashboard-root.light .notes-list-pane::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.9);
+}
+
+.note-editor-pane {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0 8px 10px; /* or just 0 for absolute full */
+  min-width: 0;
+  height: 100%;
+  transition: padding 0.18s ease, margin 0.18s ease;
+}
+
+.dashboard-root.sidebar-collapsed .note-editor-pane {
+  padding-left: 10px;
+}
+
+/* Title + color tag row */
+
+.note-editor-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+  position: relative;
+}
+
+.note-editor-title-input {
+  margin-bottom: 0;
+  flex: 1;
+}
+
+.note-editor-color-tag {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.8);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+/* Small color popover for note editor header */
+
+.note-color-popover {
+  position: absolute;
+  right: 0;
+  top: 30px;
+  z-index: 260;
+}
+
+.note-color-popover-inner {
+  padding: 8px;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.98);
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  box-shadow: 0 16px 30px rgba(15, 23, 42, 0.95);
+  display: grid;
+  grid-template-columns: repeat(4, 20px);
+  gap: 8px;
+}
+
+.dashboard-root.light .note-color-popover-inner {
+  background: #ffffff;
+  border-color: #e5e7eb;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+}
+
+.note-color-popover-inner .color-option {
+  border-radius: 999px;
+  aspect-ratio: 1 / 1;
+}
+
+/* Note content / textarea */
+
+.note-editor-textarea {
+  flex: 1;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  background: rgba(15, 23, 42, 0.95);
+  color: #e5e7eb;
+  padding: 8px 12px;
+  font-size: 13px;
+  resize: none;
+  min-height: 32px;
+  max-height: 200px;
+  line-height: 1.4;
+  overflow-y: auto;
+}
+
+.note-editor-textarea::-webkit-scrollbar {
+  width: 6px;
+}
+.note-editor-textarea::-webkit-scrollbar-thumb {
+  background: rgba(51, 65, 85, 0.85);
+  border-radius: 3px;
+}
+
+.dashboard-root.light .note-editor-textarea {
+  background: #ffffff;
+  color: #111827;
+  border-color: #d1d5db;
+}
+
+.dashboard-root.light .note-editor-textarea::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.9);
+}
+
+/* Note entries list (saved prompt+response blocks) */
+
+.note-entries-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-right: 4px;
+  margin-bottom: 0;
+  overflow-y: auto;
+}
+
+.note-entries-list::-webkit-scrollbar {
+  width: 6px;
+}
+.note-entries-list::-webkit-scrollbar-thumb {
+  background: rgba(51, 65, 85, 0.85);
+  border-radius: 3px;
+}
+
+.dashboard-root.light .note-entries-list::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.9);
+}
+
+.note-entries-list-structured {
+  /* optional extra hook if needed later */
+}
+
+.note-entry-card {
+  border-radius: 12px;
+  padding: 14px 16px;
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.3);
+  transition: all 0.2s ease;
+}
+
+.note-entry-card:hover {
+  border-color: rgba(148, 163, 184, 0.6);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.4);
+  background: rgba(15, 23, 42, 0.65);
+}
+
+.dashboard-root.light .note-entry-card {
+  background: #fafbfc;
+  border-color: #e5e7eb;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+}
+
+.dashboard-root.light .note-entry-card:hover {
+  background: #ffffff;
+  border-color: #d1d5db;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+}
+
+.note-entry-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.dashboard-root.light .note-entry-header {
+  color: #6b7280;
+}
+
+.note-entry-label {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.note-entry-menu-btn {
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  cursor: pointer;
+  padding: 0 4px;
+  font-size: 14px;
+}
+
+.note-entry-menu-btn:hover {
+  color: #e5e7eb;
+}
+
+.dashboard-root.light .note-entry-menu-btn:hover {
+  color: #111827;
+}
+
+/* note-entry menu (inside card) */
+.note-entry-menu {
+  position: absolute;
+  right: 0;
+  z-index: 260;
+  min-width: 150px;
+  padding: 6px;
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.98);
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  box-shadow: 0 16px 30px rgba(15, 23, 42, 0.9);
+}
+
+/* direction for note entry menu */
+.note-entry-menu.menu-down {
+  top: 24px;
+}
+
+.note-entry-menu.menu-up {
+  bottom: 24px;
+}
+
+.dashboard-root.light .note-entry-menu {
+  background: #ffffff;
+  border-color: #e5e7eb;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+}
+
+.note-entry-menu button {
+  border: none;
+  background: transparent;
+  color: #e5e7eb;
+  padding: 6px 8px;
+  font-size: 12px;
+  text-align: left;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.note-entry-menu button:hover {
+  background: rgba(37, 99, 235, 0.16);
+}
+
+.note-entry-menu button.danger {
+  color: #fca5a5;
+}
+
+.note-entry-menu button.danger:hover {
+  background: rgba(248, 113, 113, 0.16);
+}
+
+.dashboard-root.light .note-entry-menu button {
+  color: #111827;
+}
+
+.dashboard-root.light .note-entry-menu button.danger {
+  color: #b91c1c;
+}
+
+.note-entry-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.note-entry-user,
+.note-entry-ai {
+  line-height: 1.5;
+}
+
+/* footer buttons */
+
+.note-editor-footer {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 10px;
+}
+
+/* we keep .note-editor-actions only (bottom color options removed) */
+.note-editor-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.note-editor-btn {
+  border-radius: 999px;
+  border: none;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+.note-editor-btn.secondary {
+  background: rgba(15, 23, 42, 0.95);
+  color: #e5e7eb;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+}
+
+.note-editor-btn.primary {
+  background: #1d4ed8;
+  color: #f9fafb;
+}
+
+.dashboard-root.light .note-editor-btn.secondary {
+  background: #f3f4f6;
+  color: #111827;
+  border-color: #d1d5db;
+}
+
+.note-editor-btn:hover {
+  transform: translateY(-1px);
+}
+
+.note-editor-empty {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 16px;
+}
+
+/* ===== EXTRA: STRUCTURED "SAVED FROM CHAT" NOTE CARDS ===== */
+
+/* Header above the list */
+.note-entries-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #9ca3af;
+  margin: 0 0 6px 0;
+  padding: 5px 10px;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 8px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.dashboard-root.light .note-entries-header {
+  color: #6b7280;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-color: rgba(148, 163, 184, 0.25);
+}
+
+/* Card variant with colored left border */
+.note-entry-card.structured {
+  position: relative;
+  padding: 10px 12px 12px 14px;
+  border-left-width: 3px;
+  border-left-style: solid;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* top row: pill + menu */
+.note-entry-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+/* “Saved from chat” pill + general note-entry pills/tags */
+
+/* Base pill (works well for dark theme) */
+.note-entry-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(37, 99, 235, 0.15);
+  color: #60a5fa;
+  border: 1px solid rgba(37, 99, 235, 0.3);
+}
+
+.dashboard-root.light .note-entry-pill {
+  background: rgba(37, 99, 235, 0.08);
+  color: #1d4ed8;
+  border-color: rgba(37, 99, 235, 0.2);
+}
+
+/* “You” / “AI” small tags inside each card */
+.note-entry-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: rgba(148, 163, 184, 0.15);
+  color: #cbd5e1;
+}
+
+.note-entry-tag.ai {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+}
+
+.dashboard-root.light .note-entry-tag {
+  background: rgba(15, 23, 42, 0.06);
+  color: #475569;
+}
+
+.dashboard-root.light .note-entry-tag.ai {
+  background: rgba(56, 189, 248, 0.12);
+  color: #0284c7;
+}
+
+/* Hide inner "NOTE" pill only for manual note blocks
+   (keep You / AI pills for saved-from-chat entries) */
+.note-entry-block:not(.user):not(.ai) .note-entry-tag {
+  display: none;
+}
+
+/* structured body – keep paragraphs clean */
+.note-entry-body.structured {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 12px;
+}
+
+/* You / AI blocks inside a saved entry */
+.note-entry-block {
+  border-radius: 10px;
+  padding: 8px 10px;
+  line-height: 1.5;
+  background: rgba(15, 23, 42, 0.88);
+}
+
+.note-entry-block p {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+/* user block */
+.note-entry-block.user {
+  border: 1px solid rgba(96, 165, 250, 0.5);
+}
+
+/* ai block */
+.note-entry-block.ai {
+  background: rgba(15, 23, 42, 1);
+  border: 1px solid rgba(52, 211, 153, 0.6);
+}
+
+.note-entry-tag.ai {
+  background: rgba(16, 185, 129, 0.2);
+  color: #a7f3d0;
+}
+
+.dashboard-root.light .note-entry-block {
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-root.light .note-entry-block.user {
+  background: #f0f9ff;
+  border-color: rgba(59, 130, 246, 0.3);
+  box-shadow: 0 1px 3px rgba(59, 130, 246, 0.08);
+}
+
+.dashboard-root.light .note-entry-block.ai {
+  background: #f0fdf4;
+  border-color: rgba(34, 197, 94, 0.3);
+  box-shadow: 0 1px 3px rgba(34, 197, 94, 0.08);
+}
+
+/* keep menu aligned in this layout */
+.note-entry-card.structured .note-entry-menu.menu-down {
+  top: 24px;
+}
+
+.note-entry-card.structured .note-entry-menu.menu-up {
+  bottom: 24px;
+}
+

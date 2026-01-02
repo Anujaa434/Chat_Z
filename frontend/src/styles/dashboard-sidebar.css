@@ -1,0 +1,1017 @@
+/* Sidebar */
+
+.sidebar {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  border-right: none;
+  background: #050816;
+  display: flex;
+  flex-direction: column;
+  margin-right: 6px;
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar-shell.collapsed .sidebar {
+  margin-right: 0;
+}
+
+.dashboard-root.light .sidebar {
+  background: #ffffff;
+  border-right-color: #e5e7eb;
+  box-shadow: 4px 0 24px rgba(15, 23, 42, 0.04);
+}
+
+.sidebar-toggle {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: none;
+  color: #64748b;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  z-index: 2;
+}
+
+.sidebar-toggle span {
+  width: 14px;
+  height: 2px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  display: block;
+}
+
+.sidebar-toggle:hover {
+  color: #94a3b8;
+  background: none;
+}
+
+.sidebar.collapsed .sidebar-content {
+  display: none;
+}
+
+.sidebar.collapsed {
+  margin-right: 0;
+  align-items: center;
+}
+
+.sidebar.collapsed .sidebar-toggle {
+  position: static;
+  margin-top: 12px;
+}
+
+.sidebar-content {
+  flex: 1;
+  padding: 56px 16px 16px;
+  overflow-y: auto;
+  overflow-x: hidden; /* prevent horizontal overflow for notes */
+}
+
+/* Scrollbar */
+
+.sidebar-content::-webkit-scrollbar {
+  width: 6px;
+}
+.sidebar-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+.sidebar-content::-webkit-scrollbar-thumb {
+  background: rgba(51, 65, 85, 0.85);
+  border-radius: 3px;
+}
+
+.dashboard-root.light .sidebar-content::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.9);
+}
+
+/* New item button */
+
+.new-item-btn {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  border: none;
+  background: #1d4ed8;
+  color: #f9fafb;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.45);
+  transition: all 0.18s ease;
+}
+
+.new-item-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+}
+
+.new-item-btn.secondary {
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  box-shadow: none;
+}
+
+.dashboard-root.light .new-item-btn.secondary {
+  background: #f3f4f6;
+  color: #111827;
+  border-color: #e5e7eb;
+}
+
+/* Selection toolbar (used for chats, notes, folders) */
+
+.selection-toolbar {
+  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  background: linear-gradient(120deg, rgba(14,18,36,0.9), rgba(16,27,53,0.9));
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 12px;
+  padding: 8px 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+.selection-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.dashboard-root.light .selection-actions {
+  color: #6b7280;
+}
+
+.selection-actions button {
+  border-radius: 999px;
+  border: none;
+  padding: 6px 11px;
+  font-size: 12px;
+  cursor: pointer;
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+  transition: all 0.16s;
+}
+
+.selection-actions button:hover {
+  background: #06b6d4;
+  color: #0b1120;
+}
+
+.selection-cancel {
+  margin-left: auto;
+  display: flex;
+}
+
+.selection-cancel button {
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  padding: 6px 13px;
+  font-size: 12px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.08);
+  color: #e5e7eb;
+  transition: all 0.18s ease;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
+.selection-cancel button:hover {
+  background: #f97316;
+  color: #0b1120;
+  border-color: #fb923c;
+}
+
+.dashboard-root.light .selection-toolbar {
+  background: linear-gradient(120deg, #f8fafc, #eef2ff);
+  border-color: #e5e7eb;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.dashboard-root.light .selection-actions button {
+  background: #e5e7eb;
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+}
+
+.dashboard-root.light .selection-actions button:hover {
+  background: #06b6d4;
+  color: #0b1120;
+}
+
+.dashboard-root.light .selection-cancel button {
+  background: #ffffff;
+  color: #111827;
+  border-color: #d1d5db;
+}
+
+.dashboard-root.light .selection-cancel button:hover {
+  background: #fb923c;
+  color: #0b1120;
+  border-color: #fb923c;
+}
+
+.selection-actions button.danger {
+  background: rgba(248, 113, 113, 0.12);
+  border: 1px solid rgba(248, 113, 113, 0.35);
+  color: #fca5a5;
+}
+
+.selection-actions button.danger:hover {
+  background: rgba(248, 113, 113, 0.18);
+  color: #fca5a5;
+}
+.dashboard-root.light .selection-actions button.danger {
+  background: #ffffff;
+  color: #b91c1c;
+  border: 1px solid rgba(248, 113, 113, 0.35);
+}
+
+.dashboard-root.light .selection-actions button.danger:hover {
+  background: rgba(248, 113, 113, 0.16);
+  color: #b91c1c;
+}
+
+/* Notes View Toggle */
+
+.notes-view-toggle {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+  background: rgba(15, 23, 42, 0.5);
+  padding: 4px;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  justify-content: center;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.toggle-btn {
+  flex: 0 1 auto;
+  padding: 7px 14px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #9ca3af;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.toggle-btn:hover {
+  background: rgba(148, 163, 184, 0.1);
+}
+
+.toggle-btn.active {
+  background: #1d4ed8;
+  color: #f9fafb;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+}
+
+.dashboard-root.light .notes-view-toggle {
+  background: #f3f4f6;
+  border-color: #e5e7eb;
+}
+
+.dashboard-root.light .toggle-btn {
+  color: #6b7280;
+}
+
+.dashboard-root.light .toggle-btn:hover {
+  background: #e5e7eb;
+}
+
+.dashboard-root.light .toggle-btn.active {
+  background: #1d4ed8;
+  color: #f9fafb;
+}
+
+/* Chats */
+
+#chats-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-item {
+  padding: 10px 10px 8px;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid transparent;
+  border-left: 3px solid transparent;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all 0.16s ease;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+}
+
+.chat-item.pinned {
+  background: rgba(6, 182, 212, 0.04);
+}
+
+.dashboard-root.light .chat-item.pinned {
+  background: rgba(6, 182, 212, 0.03);
+}
+
+.chat-item.active {
+  border-left-color: #6366f1;
+  background: rgba(99, 102, 241, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(99, 102, 241, 0.2);
+}
+
+.dashboard-root.light .chat-item.active {
+  border-left-color: #6366f1;
+  background: rgba(99, 102, 241, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(99, 102, 241, 0.15);
+}
+
+.chat-item:hover {
+  background: rgba(15, 23, 42, 1);
+}
+
+.chat-item.menu-open {
+  z-index: 200;
+}
+
+.dashboard-root.light .chat-item {
+  background: #ffffff;
+  border-color: #e5e7eb;
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.04);
+}
+
+.dashboard-root.light .chat-item:hover {
+  background: #f9fafb;
+}
+
+.chat-item-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.chat-item-title-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.chat-pin-icon {
+  width: 12px;
+  height: 12px;
+  color: #06b6d4;
+  opacity: 0.5;
+  display: none;
+  flex-shrink: 0;
+}
+
+.chat-item.pinned .chat-pin-icon {
+  display: inline-flex;
+}
+
+.dashboard-root.light .chat-pin-icon {
+  color: #0891b2;
+  opacity: 0.6;
+}
+
+.chat-item-title {
+  font-size: 13px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
+}
+
+.chat-item-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.chat-select-checkbox {
+  width: 14px;
+  height: 14px;
+  accent-color: #06b6d4;
+  flex-shrink: 0;
+}
+
+.chat-item-preview {
+  font-size: 11px;
+  color: #9ca3af;
+  margin-bottom: 6px;
+  display: none; /* HIDE PREVIEW – only title visible */
+}
+
+.dashboard-root.light .chat-item-preview {
+  color: #6b7280;
+}
+
+/* 3-dot menu button */
+
+.chat-menu-btn {
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0 2px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.chat-menu-btn:hover {
+  color: #e5e7eb;
+}
+
+.dashboard-root.light .chat-menu-btn:hover {
+  color: #111827;
+}
+
+/* Floating menus – shared base */
+
+.chat-menu {
+  position: absolute;
+  right: 8px;
+  z-index: 300;
+  min-width: 170px;
+  padding: 8px 6px;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.98);
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  box-shadow: 0 18px 35px rgba(15, 23, 42, 0.95);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  backdrop-filter: blur(14px);
+}
+
+/* per-item direction */
+.chat-menu.menu-down {
+  top: 30px;
+}
+
+.chat-menu.menu-up {
+  bottom: 30px;
+}
+
+.dashboard-root.light .chat-menu {
+  background: #ffffff;
+  border-color: #e5e7eb;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+}
+
+.chat-menu button {
+  border: none;
+  background: transparent;
+  color: #e5e7eb;
+  padding: 7px 10px;
+  font-size: 13px;
+  text-align: left;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.chat-menu button:hover {
+  background: rgba(37, 99, 235, 0.16);
+}
+
+.chat-menu button.danger {
+  color: #fca5a5;
+}
+
+.chat-menu button.danger:hover {
+  background: rgba(248, 113, 113, 0.16);
+}
+
+.dashboard-root.light .chat-menu button {
+  color: #111827;
+}
+
+.dashboard-root.light .chat-menu button.danger {
+  color: #b91c1c;
+}
+
+/* Folders */
+
+.folders-section {
+  margin-top: 10px;
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6b7280;
+  margin-bottom: 8px;
+}
+
+.folders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.folder-item {
+  display: flex;
+  align-items: center;
+  padding: 7px 6px 7px 9px;
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid transparent;
+  border-left: 3px solid transparent;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.folder-item:hover {
+  background: rgba(15, 23, 42, 1);
+  transform: translateX(3px);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.7);
+}
+
+.folder-item.menu-open {
+  z-index: 200;
+}
+
+.folder-item.pinned {
+  background: rgba(6, 182, 212, 0.04);
+}
+
+.dashboard-root.light .folder-item.pinned {
+  background: rgba(6, 182, 212, 0.03);
+}
+
+.folder-item.active-folder {
+  border-left-color: #6366f1;
+  background: rgba(99, 102, 241, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(99, 102, 241, 0.2);
+}
+
+.dashboard-root.light .folder-item {
+  background: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.04);
+}
+
+.dashboard-root.light .folder-item:hover {
+  transform: translateX(3px);
+  box-shadow: 0 16px 28px rgba(15, 23, 42, 0.06);
+}
+
+.dashboard-root.light .folder-item.active-folder {
+  border-left-color: #6366f1;
+  background: rgba(99, 102, 241, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(99, 102, 241, 0.15);
+}
+
+.folder-icon-3d {
+  width: 44px;
+  height: 40px;
+  margin-right: 10px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+
+.folder-item:hover .folder-icon-3d {
+  transform: rotateY(-10deg) rotateX(5deg);
+}
+
+.folder-back,
+.folder-front,
+.folder-tab {
+  position: absolute;
+  border-radius: 4px;
+}
+
+.folder-back {
+  width: 100%;
+  height: 80%;
+  bottom: 0;
+  left: 0;
+}
+
+.folder-front {
+  width: 100%;
+  height: 80%;
+  bottom: 0;
+  left: 0;
+}
+
+.folder-tab {
+  width: 60%;
+  height: 30%;
+  top: 0;
+  left: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.folder-details {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.folder-name-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  margin-bottom: 2px;
+}
+
+.folder-pin-icon {
+  width: 12px;
+  height: 12px;
+  color: #06b6d4;
+  opacity: 0.5;
+  display: none;
+  flex-shrink: 0;
+}
+
+.folder-item.pinned .folder-pin-icon {
+  display: inline-flex;
+}
+
+.dashboard-root.light .folder-pin-icon {
+  color: #0891b2;
+  opacity: 0.6;
+}
+
+.folder-name {
+  font-size: 13px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
+}
+
+.folder-count {
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.dashboard-root.light .folder-count {
+  color: #6b7280;
+}
+
+.folder-actions {
+  display: flex;
+  gap: 4px;
+  position: relative;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.folder-action-btn {
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0 2px;
+  flex-shrink: 0;
+}
+
+.folder-action-btn:hover {
+  color: #f9fafb;
+}
+
+.dashboard-root.light .folder-action-btn:hover {
+  color: #111827;
+}
+
+/* folder menu uses same base as chat-menu */
+
+.folder-menu {
+  right: 0;
+}
+
+/* direction */
+.folder-menu.menu-down {
+  top: 32px;
+}
+
+.folder-menu.menu-up {
+  bottom: 32px;
+}
+
+.folder-select-checkbox {
+  width: 14px;
+  height: 14px;
+  accent-color: #06b6d4;
+  flex-shrink: 0;
+}
+
+/* Notes in sidebar */
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+/* Notes main grid for right-side view (if you ever use it) */
+.notes-main-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.note-card {
+  border-radius: 10px;
+  padding: 10px 10px 10px 7px;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid transparent;
+  border-left: 3px solid transparent;
+  min-height: 80px;
+  cursor: pointer;
+  transition: all 0.16s ease;
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+}
+
+.note-card.large {
+  min-height: 110px;
+}
+
+.note-card.pinned {
+  background: rgba(6, 182, 212, 0.04);
+}
+
+.dashboard-root.light .note-card.pinned {
+  background: rgba(6, 182, 212, 0.03);
+}
+
+.note-card:hover {
+  background: rgba(15, 23, 42, 1);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.8);
+  transform: translateY(-2px);
+}
+
+.note-card.menu-open {
+  z-index: 200;
+}
+
+.note-card.active-note {
+  border-left-color: #6366f1;
+  background: rgba(99, 102, 241, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(99, 102, 241, 0.2);
+}
+
+.dashboard-root.light .note-card {
+  background: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+}
+
+.dashboard-root.light .note-card:hover {
+  box-shadow: 0 18px 34px rgba(15, 23, 42, 0.06);
+}
+
+.dashboard-root.light .note-card.active-note {
+  border-left-color: #6366f1;
+  background: rgba(99, 102, 241, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(99, 102, 241, 0.15);
+}
+
+.note-card-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.note-title-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.note-pin-icon {
+  width: 12px;
+  height: 12px;
+  color: #06b6d4;
+  opacity: 0.5;
+  display: none;
+  flex-shrink: 0;
+}
+
+.note-card.pinned .note-pin-icon {
+  display: inline-flex;
+}
+
+.dashboard-root.light .note-pin-icon {
+  color: #0891b2;
+  opacity: 0.6;
+}
+
+.note-color-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.note-card-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.note-title {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 0;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.note-preview {
+  font-size: 11px;
+  color: #9ca3af;
+  margin-top: 2px;
+  display: none; /* Hide content/message preview in sidebar */
+}
+
+.dashboard-root.light .note-preview {
+  color: #6b7280;
+}
+
+.note-folder-badge {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 3px 8px;
+  background: rgba(148, 163, 184, 0.15);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 6px;
+  font-size: 10px;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.dashboard-root.light .note-folder-badge {
+  background: rgba(107, 114, 128, 0.1);
+  border-color: rgba(107, 114, 128, 0.2);
+  color: #6b7280;
+}
+
+.note-select-checkbox {
+  width: 14px;
+  height: 14px;
+  accent-color: #06b6d4;
+  flex-shrink: 0;
+}
+
+/* Note menu */
+
+.note-menu-btn {
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0 2px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.note-menu-btn:hover {
+  color: #e5e7eb;
+}
+
+.dashboard-root.light .note-menu-btn:hover {
+  color: #111827;
+}
+
+.note-menu {
+  position: absolute;
+  right: 8px;        /* align under 3-dot by default */
+  z-index: 9999;
+  min-width: 180px;
+  padding: 8px 6px;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.98);
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  box-shadow: 0 18px 35px rgba(15, 23, 42, 0.95);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  backdrop-filter: blur(16px);
+}
+
+/* direction helpers */
+.note-menu.menu-down {
+  top: 32px;
+}
+
+.note-menu.menu-up {
+  bottom: 32px;
+}
+
+.dashboard-root.light .note-menu {
+  background: #ffffff;
+  border-color: #e5e7eb;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+}
+
+.note-menu button {
+  border: none;
+  background: transparent;
+  color: #e5e7eb;
+  padding: 7px 10px;
+  font-size: 13px;
+  text-align: left;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.note-menu button:hover {
+  background: rgba(37, 99, 235, 0.16);
+}
+
+.note-menu button.danger {
+  color: #fca5a5;
+}
+
+.note-menu button.danger:hover {
+  background: rgba(248, 113, 113, 0.16);
+}
+
+.dashboard-root.light .note-menu button {
+  color: #111827;
+}
+
+.dashboard-root.light .note-menu button.danger {
+  color: #b91c1c;
+}

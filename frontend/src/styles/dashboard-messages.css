@@ -1,0 +1,412 @@
+/* Messages */
+
+.chat-messages {
+  flex: 1;
+  margin-top: 4px;  /* reduced from 6px */
+  padding: 4px 0;   /* reduced from 6px */
+  border-radius: 12px;
+  background: linear-gradient(180deg, #050816, #020617);
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  position: relative;
+}
+
+.chat-messages-inner {
+  max-width: 900px;     /* same width band as input */
+  margin: 0 auto;
+  padding: 0 8px 16px;
+  position: relative;
+}
+
+/* Light theme: proper light canvas */
+.dashboard-root.light .chat-messages {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.chat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+.chat-messages::-webkit-scrollbar-thumb {
+  background: rgba(51, 65, 85, 0.85);
+  border-radius: 3px;
+}
+
+.dashboard-root.light .chat-messages::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.9);
+}
+
+/* Date header */
+
+.date-header {
+  text-align: center;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #6b7280;
+  margin: 10px 0 8px;
+  position: relative;
+  opacity: 0.6;
+}
+
+.date-header:before,
+.date-header:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 30%;
+  height: 0.5px;
+  background: rgba(107, 114, 128, 0.2);
+}
+
+.date-header:before {
+  left: 0;
+}
+
+.date-header:after {
+  right: 0;
+}
+
+.dashboard-root.light .date-header {
+  color: #9ca3af;
+}
+
+.dashboard-root.light .date-header:before,
+.dashboard-root.light .date-header:after {
+  background: rgba(156, 163, 175, 0.15);
+}
+
+/* Floating sticky date header (WhatsApp-like) */
+.date-header-floating {
+  position: sticky;
+  top: 6px;
+  z-index: 2;
+  display: inline-block;
+  margin: 0 auto 8px auto;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #e5e7eb;
+  background: rgba(31, 41, 55, 0.75);
+  backdrop-filter: saturate(140%) blur(4px);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.25);
+  text-align: center;
+  width: max-content;
+  cursor: pointer;
+}
+
+.dashboard-root.light .date-header-floating {
+  color: #374151;
+  background: rgba(243, 244, 246, 0.85);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+}
+
+/* Empty state */
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 12px 24px 20px 24px; /* sit just below tabs */
+  gap: 8px;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  align-self: center;
+  justify-content: flex-start;
+}
+
+.empty-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #e5e7eb;
+  margin-bottom: 4px;
+}
+
+.empty-subtitle {
+  font-size: 12px;
+  color: #9ca3af;
+  opacity: 0.85;
+  margin: 0;
+  max-width: 280px;
+  line-height: 1.5;
+}
+
+.dashboard-root.light .empty-title {
+  color: #111827;
+}
+
+.dashboard-root.light .empty-subtitle {
+  color: #6b7280;
+}
+
+/* Message bubbles */
+
+.message-row {
+  display: flex;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.message-row.menu-open {
+  z-index: 99999 !important;
+}
+
+.message-row.user {
+  justify-content: flex-end;
+}
+
+.message-row.ai {
+  justify-content: flex-start;
+}
+
+.message-bubble {
+  max-width: min(65%, 600px);
+  border-radius: 16px;
+  padding: 8px 10px;
+  font-size: 13px;
+  line-height: 1.4;
+  position: relative;
+  z-index: 1;
+  /* KEEP FORMATTING WHEN PASTING TEXT / CODE */
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.message-bubble.pinned {
+  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.9);
+}
+
+.message-highlight {
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 1),
+    0 0 32px rgba(56, 189, 248, 0.95),
+    0 0 48px rgba(56, 189, 248, 0.6) !important;
+  background: rgba(236, 72, 153, 0.22);
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.message-row.user .message-bubble {
+  background: linear-gradient(135deg, #06b6d4, #6366f1);
+  color: #0b1120;
+  border-bottom-right-radius: 4px;
+}
+
+.message-row.ai .message-bubble {
+  background: #111827;
+  color: #e5e7eb;
+  border-bottom-left-radius: 4px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+}
+
+/* Light theme bubbles */
+.dashboard-root.light .message-row.user .message-bubble {
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  color: #f9fafb;
+}
+
+.dashboard-root.light .message-row.ai .message-bubble {
+  background: #ffffff;
+  color: #111827;
+  border: 1px solid #e5e7eb;
+}
+
+/* light theme highlight */
+.dashboard-root.light .message-highlight {
+  background: rgba(191, 219, 254, 0.8);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.95),
+    0 0 32px rgba(59, 130, 246, 0.85),
+    0 0 48px rgba(59, 130, 246, 0.5) !important;
+}
+
+.message-meta {
+  margin-top: 3px;
+  font-size: 9px;
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  line-height: 1.2;
+}
+
+/* AI messages: slightly lighter opacity */
+.message-row.ai .message-meta {
+  opacity: 0.6;
+}
+
+.message-meta-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Saved indicator */
+.saved-pill {
+  display: inline-block;
+  padding: 1px 5px;
+  font-size: 9px;
+  border-radius: 999px;
+  background: transparent;
+  color: #06b6d4;
+  border: 1px solid rgba(6, 182, 212, 0.4);
+  opacity: 0.7;
+  transition: all 0.15s ease;
+}
+
+.saved-pill:hover {
+  opacity: 1;
+}
+
+.dashboard-root.light .saved-pill {
+  color: #2563eb;
+  border-color: rgba(37, 99, 235, 0.4);
+}
+
+.message-select-checkbox {
+  width: 13px;
+  height: 13px;
+  accent-color: #06b6d4;
+}
+
+.message-menu-btn {
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  cursor: pointer;
+  padding: 0 4px;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.message-row:hover .message-menu-btn,
+.message-row:focus-within .message-menu-btn {
+  opacity: 1;
+}
+
+.message-menu-btn:hover {
+  color: #e5e7eb;
+}
+
+.message-menu-btn:focus {
+  outline: none;
+  color: #e5e7eb;
+  opacity: 1;
+}
+
+/* Scroll-to-bottom affordance */
+.scroll-to-bottom-btn {
+  position: sticky;
+  bottom: 12px;
+  float: right;
+  margin-right: 12px;
+  z-index: 3;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1px solid rgba(6, 182, 212, 0.4);
+  background: rgba(15, 23, 42, 0.8);
+  color: #06b6d4;
+  font-size: 14px;
+  line-height: 26px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.15s ease;
+}
+
+.scroll-to-bottom-btn:hover {
+  background: rgba(15, 23, 42, 0.95);
+  border-color: rgba(6, 182, 212, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.2);
+}
+
+.dashboard-root.light .scroll-to-bottom-btn {
+  border-color: rgba(37, 99, 235, 0.3);
+  background: #ffffff;
+  color: #2563eb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.dashboard-root.light .scroll-to-bottom-btn:hover {
+  background: #f9fafb;
+  border-color: rgba(37, 99, 235, 0.5);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+}
+
+.dashboard-root.light .message-menu-btn:hover {
+  color: #111827;
+}
+
+/* Message 3-dot menu */
+
+.message-menu {
+  position: absolute;
+  right: 4px;
+  z-index: 9999;
+  min-width: 170px;
+  padding: 6px 6px;
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.98);
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  box-shadow: 0 16px 30px rgba(15, 23, 42, 0.95);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  backdrop-filter: blur(12px);
+}
+
+/* direction for message menu */
+.message-menu.menu-down {
+  top: 24px;
+}
+
+.message-menu.menu-up {
+  bottom: 24px;
+}
+
+.dashboard-root.light .message-menu {
+  background: #ffffff;
+  border-color: #e5e7eb;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+}
+
+.message-menu button {
+  border: none;
+  background: transparent;
+  color: #e5e7eb;
+  padding: 6px 9px;
+  font-size: 12px;
+  text-align: left;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.message-menu button:hover {
+  background: rgba(37, 99, 235, 0.16);
+}
+
+
+.message-menu button.danger {
+  color: #fca5a5;
+}
+
+.message-menu button.danger:hover {
+  background: rgba(248, 113, 113, 0.16);
+}
+
+.dashboard-root.light .message-menu button {
+  color: #111827;
+}
+
+.dashboard-root.light .message-menu button.danger {
+  color: #b91c1c;
+}

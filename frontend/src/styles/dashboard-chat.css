@@ -1,0 +1,370 @@
+/* Chat area */
+
+.chat-area {
+  flex: 1;
+  display: flex;
+  padding: 14px; /* was 18px */
+  transition: padding 0.18s ease;
+  min-height: 0;
+}
+
+/* When sidebar is collapsed, add extra left padding to match Chat spacing */
+.dashboard-root.sidebar-collapsed .chat-area {
+  padding-left: 24px;
+}
+
+/* When sidebar is collapsed, use inner padding for consistent alignment */
+.dashboard-root.sidebar-collapsed .chat-panel {
+  padding-left: 16px;
+  transition: padding 0.18s ease;
+}
+
+/* Ensure inner content has matching offset (affects Notes list and editor too) */
+.dashboard-root.sidebar-collapsed .chat-messages-inner {
+  padding-left: 16px;
+  transition: padding 0.18s ease;
+}
+
+/* Chat card – a bit less padding */
+
+.chat-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-radius: 18px;
+  padding: 10px 10px 8px;
+  background: radial-gradient(
+    circle at top left,
+    #050816 0,
+    #020617 45%,
+    #050816 100%
+  );
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.4);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  min-height: 0;
+  position: relative;
+}
+
+.chat-panel:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 26px 55px rgba(15, 23, 42, 0.9);
+}
+
+.dashboard-root.light .chat-panel {
+  background: linear-gradient(180deg, #ffffff, #f3f4f6);
+  border-color: #e5e7eb;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+}
+
+/* Chat header bar REMOVED - model moved to input area, title in sidebar */
+/* Keeping styles for any legacy references */
+
+.chat-header-bar {
+  display: none;
+}
+
+.chat-title {
+  display: none;
+}
+
+.chat-header-right {
+  display: none;
+}
+
+/* Model selector in input area - compact design */
+
+.model-select-compact {
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  background: rgba(15, 23, 42, 0.6);
+  color: #e5e7eb;
+  font-size: 11px;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  line-height: 1.4;
+  height: auto;
+  flex-shrink: 0;
+  min-width: 100px;
+}
+
+.model-select-compact:hover {
+  background: rgba(15, 23, 42, 0.8);
+  border-color: rgba(148, 163, 184, 0.5);
+}
+
+.model-select-compact:focus {
+  outline: none;
+  border-color: #06b6d4;
+  background: rgba(15, 23, 42, 0.9);
+}
+
+.dashboard-root.light .model-select-compact {
+  background: #f9fafb;
+  color: #374151;
+  border-color: #d1d5db;
+}
+
+.dashboard-root.light .model-select-compact:hover {
+  background: #ffffff;
+  border-color: #9ca3af;
+}
+
+.dashboard-root.light .model-select-compact:focus {
+  border-color: #06b6d4;
+  background: #ffffff;
+}
+
+/* ===================== PINNED MESSAGE BAR – REFINED, SOFTER APPEARANCE ===================== */
+
+.pinned-bar {
+  margin-top: 0;
+  margin-bottom: 2px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  width: 100%;
+  background: rgba(6, 182, 212, 0.06);
+  border: none;
+  border-bottom: 0.5px solid rgba(6, 182, 212, 0.15);
+  box-shadow: none;
+  font-size: 10px;
+  color: #e5e7eb;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  min-height: 28px;
+}
+
+.pinned-bar:hover {
+  background: rgba(6, 182, 212, 0.12);
+  border-color: rgba(6, 182, 212, 0.4);
+}
+
+.pinned-bar:active {
+  transform: scale(0.98);
+}
+
+.dashboard-root.light .pinned-bar {
+  background: rgba(37, 99, 235, 0.08);
+  border-color: rgba(37, 99, 235, 0.25);
+  color: #111827;
+}
+
+.dashboard-root.light .pinned-bar:hover {
+  background: rgba(37, 99, 235, 0.12);
+  border-color: rgba(37, 99, 235, 0.4);
+}
+
+/* this class is on the same button, just keep it simple */
+.pinned-single-bar {
+  border: none;
+}
+
+/* we’re not using the left accent now – hide it */
+.pinned-bar-left {
+  display: none;
+}
+
+/* main text area – left aligned */
+.pinned-main-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+}
+
+.pinned-label-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+}
+
+.pinned-label {
+  opacity: 0.8;
+  font-size: 9px;
+}
+
+.pinned-index {
+  font-size: 9px;
+  opacity: 0.5;
+}
+
+/* preview line (only one content line) */
+.pinned-preview-line {
+  font-size: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0.9;
+}
+
+/* hide "You • 12:22 AM" line like you asked */
+.pinned-meta-line {
+  display: none;
+}
+
+/* 3-line vertical indicator on the right */
+.pinned-indicator {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  align-self: stretch;
+}
+
+.pinned-indicator-line {
+  width: 3px;
+  flex: 1;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.55);  /* deep navy, visible on blue bar */
+  opacity: 0.9;
+  transition: all 0.16s ease;
+}
+
+.pinned-indicator-line.active {
+  width: 4px;
+  background: #f9fafb;                 /* almost white */
+  box-shadow: 0 0 6px rgba(191, 219, 254, 0.9);
+  opacity: 1;
+}
+
+/* light theme – enhanced visibility and glow */
+.dashboard-root.light .pinned-indicator-line {
+  background: rgba(37, 99, 235, 0.35);  /* visible blue on light background */
+  opacity: 0.7;
+}
+
+.dashboard-root.light .pinned-indicator-line.active {
+  width: 4px;
+  background: #2563eb;  /* bright blue */
+  box-shadow: 0 0 8px rgba(37, 99, 235, 0.6), 0 0 4px rgba(37, 99, 235, 0.4);
+  opacity: 1;
+}
+
+/* small circular badge at the right with count (not used now, but kept) */
+.pinned-badge {
+  min-width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  background: rgba(15, 23, 42, 0.96);
+  color: #e5e7eb;
+}
+
+.dashboard-root.light .pinned-badge {
+  background: transparent;
+  color: #f9fafb;
+  border-color: rgba(209, 213, 219, 0.9);
+}
+
+/* subtle hover */
+.pinned-bar:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+}
+
+/* Message selection toolbar */
+
+.message-selection-toolbar {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 11px;
+}
+/* Add Files to Folder Button */
+
+.add-notes-to-folder-btn {
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #9ca3af;
+  background: transparent;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.16s ease;
+  white-space: nowrap;
+}
+
+.add-notes-to-folder-btn:hover {
+  color: #e5e7eb;
+  background: rgba(148, 163, 184, 0.1);
+  border-color: rgba(148, 163, 184, 0.5);
+  transform: translateY(-1px);
+}
+
+/* Attention accent when folder is empty */
+.add-notes-to-folder-btn.accent {
+  color: #e5e7eb;
+  border-color: rgba(56, 189, 248, 0.8);
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2), 0 0 18px rgba(56, 189, 248, 0.3);
+  animation: pulse-glow 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.18), 0 0 14px rgba(56, 189, 248, 0.28); }
+  50% { box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.28), 0 0 22px rgba(56, 189, 248, 0.44); }
+}
+
+.dashboard-root.light .add-notes-to-folder-btn {
+  color: #6b7280;
+  border-color: #d1d5db;
+}
+
+.dashboard-root.light .add-notes-to-folder-btn:hover {
+  color: #111827;
+  background: rgba(148, 163, 184, 0.08);
+  border-color: #9ca3af;
+}
+
+.dashboard-root.light .add-notes-to-folder-btn.accent {
+  color: #111827;
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.25), 0 0 18px rgba(96, 165, 250, 0.3);
+}
+
+/* Empty-state CTA link/button */
+.empty-cta {
+  margin-top: 10px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #93c5fd;
+  background: rgba(37, 99, 235, 0.08);
+  border: 1px solid rgba(96, 165, 250, 0.35);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.empty-cta:hover {
+  color: #bfdbfe;
+  background: rgba(37, 99, 235, 0.14);
+  border-color: rgba(96, 165, 250, 0.6);
+  transform: translateY(-1px);
+}
+
+.dashboard-root.light .empty-cta {
+  color: #1d4ed8;
+  background: rgba(59, 130, 246, 0.08);
+  border-color: rgba(59, 130, 246, 0.35);
+}
+
+.dashboard-root.light .empty-cta:hover {
+  color: #1e40af;
+  background: rgba(59, 130, 246, 0.12);
+  border-color: rgba(59, 130, 246, 0.6);
+}

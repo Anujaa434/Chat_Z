@@ -13,6 +13,6 @@
     "types": ["node"],
     "sourceMap": true
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "../frontend/src/contexts"],
   "exclude": ["node_modules", "dist"]
 }

@@ -1,0 +1,93 @@
+/* Input row – move a bit closer to messages */
+
+.chat-input-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  margin-top: 6px;   /* was 8px */
+  padding-top: 4px;  /* was 6px */
+  border-top: 1px solid rgba(148, 163, 184, 0.3);
+  justify-content: center;         /* center inner band like ChatGPT */
+}
+
+.dashboard-root.light .chat-input-row {
+  border-top-color: #e5e7eb;
+}
+
+/* FULL-WIDTH BAND LIKE CHATGPT */
+.chat-input-inner {
+  width: 100%;
+  max-width: 900px;      /* same as .chat-messages-inner */
+  min-width: 0;          /* IMPORTANT: allow flex child to shrink, fixes overflow */
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+/* AUTO-GROW TEXTAREA LIKE CHATGPT */
+.chat-input {
+  flex: 1;
+  box-sizing: border-box;   /* FIX: padding + border stay inside width */
+  width: 100%;              /* FIX: never exceed inner container */
+  max-width: 100%;
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  background: rgba(15, 23, 42, 0.95);
+  color: #e5e7eb;
+  padding: 8px 12px;
+  font-size: 13px;
+  min-height: 40px;
+  max-height: 200px; /* stop growing after this */
+  line-height: 1.4;
+  resize: none;      /* user cannot drag to resize */
+  overflow-y: auto;  /* scroll after hitting max-height */
+}
+
+.chat-input::-webkit-scrollbar {
+  width: 4px;
+}
+.chat-input::-webkit-scrollbar-thumb {
+  background: rgba(51, 65, 85, 0.9);
+  border-radius: 2px;
+}
+
+.chat-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Light input: white bubble */
+.dashboard-root.light .chat-input {
+  background: #ffffff;
+  color: #111827;
+  border-color: #d1d5db;
+}
+
+/* Send button */
+
+.chat-send-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: none;
+  background: #1d4ed8;
+  color: #f9fafb;
+  font-size: 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.45);
+  transition: all 0.16s ease;
+}
+
+.chat-send-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.chat-send-btn:not(:disabled):hover {
+  transform: translateY(-1px);
+}

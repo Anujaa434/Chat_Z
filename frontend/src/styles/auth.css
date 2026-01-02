@@ -1,0 +1,616 @@
+ /* =========================
+   AUTH THEME – MIDNIGHT BLUE AI
+   ========================= */
+
+:root {
+  /* Background – deep navy */
+  --bg-1: #020617;
+  --bg-2: #020617;
+  --bg-3: #000814;
+
+  /* Card */
+  --card-bg-1: #020617;
+  --card-bg-2: #020617;
+
+  /* Accent (cyan) */
+  --accent: #22d3ee;
+  --accent-soft: #38bdf8;
+  --border: #1f2937;
+
+  /* Text */
+  --text-main: #e5e7eb;
+  --text-soft: #9ca3af;
+}
+
+/* base background – no white flashes */
+html,
+body,
+#root {
+  height: 100%;
+  background-color: #020617;
+}
+
+/* reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+/* =========================
+   BACKGROUND
+   ========================= */
+
+body {
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #020b25 0%, #020617 40%, #000814 100%);
+  background-attachment: fixed;
+  color: var(--text-main);
+  overflow-x: hidden;
+}
+
+/* dots handled in React */
+body::before,
+body::after {
+  content: none;
+}
+
+/* dotted glow canvas */
+.auth-dotted-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* =========================
+   LAYOUT – SAME FOR LOGIN & SIGNUP
+   ========================= */
+
+.signup-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* MAIN CARD — fixed size, shared for login + signup */
+.wrapper {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  max-width: 900px;
+  height: 520px;
+
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+
+  padding: 0;
+  margin: 0 auto;
+
+  border-radius: 1.4rem;
+  background: transparent;
+
+  /* softer, premium shadow */
+  box-shadow: 0 26px 60px rgba(15, 23, 42, 0.9);
+}
+
+.wrapper.signUp {
+  gap: 0;
+}
+
+/* =========================
+   LEFT – ILLUSTRATION COLUMN
+   ========================= */
+
+.illustration {
+  /* left column slightly smaller than form */
+  flex: 0 0 40%;
+  display: flex;
+  height: 100%;
+}
+
+.illustration-card {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+
+  height: 100%;
+  border-radius: 1.4rem 0 0 1.4rem;
+
+  /* glassy dark blue + soft spotlight from top-left */
+  background:
+    radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.06), transparent 60%),
+    radial-gradient(circle at top, #020b25 0%, #020617 45%, #000814 100%);
+  border-right: 1px solid rgba(15, 23, 42, 0.9);
+  backdrop-filter: blur(18px);
+}
+
+/* variant when used with AI strip (no image) */
+.illustration-card--ai {
+  background:
+    radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.06), transparent 60%),
+    radial-gradient(circle at top, #020b25 0%, #020617 45%, #000814 100%);
+}
+
+/* (old image styles kept in case you reuse them somewhere) */
+.illustration-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.03);
+  transition: transform 0.25s ease;
+}
+
+.illustration-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(15, 23, 42, 0.25),
+    rgba(15, 23, 42, 0.55)
+  );
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.illustration-card:hover .illustration-img {
+  transform: scale(1.06);
+}
+
+.illustration-card:hover::after {
+  opacity: 0.9;
+}
+
+/* =========================
+   RIGHT – FORM COLUMN
+   ========================= */
+
+.form {
+  /* right (login) column a bit wider */
+  flex: 0 0 60%;
+  height: 100%;
+  padding: 2.2rem 2.6rem;
+
+  border-radius: 0 1.4rem 1.4rem 0;
+  background: radial-gradient(circle at top left, #020617, #020617);
+  border: 1px solid rgba(15, 23, 42, 0.9);
+  border-left: none;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* header */
+.heading {
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.subheading {
+  font-size: 0.96rem;
+  color: #d4d4d8;
+  margin: 0.35rem 0 1rem;
+}
+
+/* form content */
+.form form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* space between fields */
+.form form > div {
+  margin-bottom: 0.75rem;
+}
+
+/* labels and inputs */
+.form label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.83rem;
+  color: #cbd5f5;
+}
+
+.form input {
+  height: 46px;
+  width: 100%;
+  padding: 0 20px;
+
+  border-radius: 0.9rem;
+  border: 1px solid var(--border);
+  background: #020617;
+  font-size: 0.9rem;
+  color: #e5e7eb;
+
+  transition: border-color 0.2s ease, box-shadow 0.2s ease,
+    transform 0.1s ease, background 0.15s ease;
+}
+
+/* Input with right-side icon (eye/eye-slash) */
+.input-with-icon {
+  position: relative;
+}
+.input-with-icon input {
+  padding-right: 40px; /* room for icon */
+}
+.input-icon-toggle {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: #4b5563;
+  padding: 4px;
+  display: grid;
+  place-items: center;
+}
+.input-icon-toggle:hover {
+  color: #6b7280;
+}
+.form input:disabled + .input-icon-toggle,
+.form input[readonly] + .input-icon-toggle {
+  cursor: default;
+  opacity: 0.7;
+}
+
+.form input::placeholder {
+  color: #6b7280;
+}
+
+.form input:focus {
+  outline: none;
+  border-color: var(--accent-soft);
+  box-shadow: 0 0 0 1px var(--accent-soft), 0 0 12px rgba(56, 189, 248, 0.35);
+  background: #02091f;
+  transform: translateY(-1px);
+}
+
+/* used on login to visually match the extra field on signup */
+.field-spacer {
+  height: 46px;
+}
+
+/* =========================
+   PRIMARY BUTTON
+   ========================= */
+
+.primary-btn {
+  margin-top: 0.9rem;
+  height: 46px;
+  width: 100%;
+
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, var(--accent), var(--accent-soft));
+  color: #ecfeff;
+
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+
+  cursor: pointer;
+  box-shadow: 0 16px 28px rgba(34, 211, 238, 0.28);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+.primary-btn:hover {
+  filter: brightness(1.04);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 20px 36px rgba(34, 211, 238, 0.36);
+}
+
+.primary-btn:active {
+  transform: scale(0.985);
+  box-shadow: 0 10px 20px rgba(15, 118, 110, 0.6);
+}
+
+/* =========================
+   FOOTER TEXT
+   ========================= */
+
+.switch-text {
+  margin-top: 0.75rem;
+  font-size: 0.84rem;
+  color: var(--text-soft);
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.link-accent {
+  color: var(--accent-soft);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.link-accent:hover {
+  text-decoration: underline;
+}
+
+/* pill + overlay text reused in strip footer */
+.brand-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.38rem 1.4rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  background: rgba(2, 6, 23, 0.9);
+  color: #a5f3fc;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  backdrop-filter: blur(10px);
+}
+
+.overlay-text {
+  font-size: 0.86rem;
+  color: #e5e7eb;
+  max-width: 16rem;
+}
+
+/* =========================
+   CARD ENTER ANIMATION
+   ========================= */
+
+.auth-card {
+  opacity: 0;
+  transform: translateY(14px) scale(0.98);
+  animation: auth-card-enter 0.55s ease-out forwards;
+}
+
+@keyframes auth-card-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    box-shadow: 0 26px 60px rgba(15, 23, 42, 0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    box-shadow: 0 26px 60px rgba(15, 23, 42, 0.9);
+  }
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 900px) {
+  .wrapper {
+    flex-direction: column;
+    max-width: 560px;
+    height: auto;
+  }
+
+  .illustration-card {
+    border-radius: 1.4rem 1.4rem 0 0;
+  }
+
+  .form {
+    border-radius: 0 0 1.4rem 1.4rem;
+    border-left: 1px solid rgba(15, 23, 42, 0.9);
+    border-top: none;
+    padding: 1.9rem 1.7rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .illustration {
+    display: none;
+  }
+
+  .wrapper {
+    max-width: 480px;
+    padding: 1.5rem 1rem;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+  }
+
+  .form {
+    border-radius: 1.4rem;
+    border-top: 1px solid rgba(15, 23, 42, 0.9);
+  }
+}
+
+/* =========================
+   AI LOGO STRIP – HORIZONTAL, CENTERED
+   ========================= */
+
+.ai-strip-root {
+  height: 100%;
+  padding: 1.6rem 2.2rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* middle area: strip + caption perfectly centered */
+.ai-strip-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.4rem;
+  position: relative;
+}
+
+/* soft glow behind strip */
+.ai-strip-center::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 260px;
+  height: 260px;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.27), transparent 70%);
+  filter: blur(22px);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+/* the window that shows the moving logos */
+.ai-strip-viewport {
+  width: 100%;
+  max-width: 420px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* fade edges left/right for premium carousel feel */
+.ai-strip-viewport::before,
+.ai-strip-viewport::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 72px;
+  pointer-events: none;
+}
+
+.ai-strip-viewport::before {
+  left: 0;
+  background: linear-gradient(
+    to right,
+    rgba(2, 6, 23, 1),
+    rgba(2, 6, 23, 0)
+  );
+}
+
+.ai-strip-viewport::after {
+  right: 0;
+  background: linear-gradient(
+    to left,
+    rgba(2, 6, 23, 1),
+    rgba(2, 6, 23, 0)
+  );
+}
+
+/* moving track */
+.ai-strip-track {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.5rem;
+
+  /* slightly slower, calmer */
+  animation: ai-strip-scroll 16s linear infinite;
+}
+
+/* each AI card */
+.ai-logo-chip {
+  width: 64px;
+  height: 64px;
+  border-radius: 1.4rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(15, 23, 42, 0.75),
+    rgba(15, 23, 42, 0.98)
+  );
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.9);
+
+  transform: scale(1);
+  transition: box-shadow 0.2s ease;
+  animation: ai-logo-pulse 16s linear infinite;
+}
+
+/* logo inside card – fixed size */
+.ai-logo-icon,
+.ai-logo-icon-svg {
+  width: 32px;
+  height: 32px;
+  display: block;
+}
+
+/* caption under strip */
+.ai-strip-caption {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  text-align: center;
+}
+
+/* bottom ChatZ pill + text fixed near bottom */
+.ai-strip-footer {
+  margin-top: auto;          /* <– pushes it down */
+}
+
+/* infinite horizontal loop */
+@keyframes ai-strip-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    /* move by half (we duplicated logos once) */
+    transform: translateX(-50%);
+  }
+}
+
+/* "center logo comes forward" effect
+   We pulse each logo one-by-one, timed with the scroll.
+*/
+
+@keyframes ai-logo-pulse {
+  0%,
+  15%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 14px 30px rgba(15, 23, 42, 0.9);
+  }
+  7% {
+    transform: scale(1.18);  /* bigger when it is roughly at centre */
+    box-shadow: 0 22px 46px rgba(15, 23, 42, 1);
+  }
+}
+
+/* delays so each logo takes turn being "in front" */
+.ai-logo-chip:nth-child(1) {
+  animation-delay: 0s;
+}
+.ai-logo-chip:nth-child(2) {
+  animation-delay: 2.6s;
+}
+.ai-logo-chip:nth-child(3) {
+  animation-delay: 5.2s;
+}
+.ai-logo-chip:nth-child(4) {
+  animation-delay: 7.8s;
+}
+.ai-logo-chip:nth-child(5) {
+  animation-delay: 10.4s;
+}
+.ai-logo-chip:nth-child(6) {
+  animation-delay: 13s;
+}
+
+/* the duplicated 7–12 will line up automatically in the second half
+   of the loop, so we don't need extra rules.
+*/ 
+
+.error-text.small {
+  font-size: 0.78rem;
+  margin-top: 0.3rem;
+  color: #fca5a5;
+}
