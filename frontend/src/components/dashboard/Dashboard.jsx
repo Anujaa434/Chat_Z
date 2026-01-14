@@ -283,6 +283,7 @@ const DashboardLayout = () => {
 
   const [folderNameInput, setFolderNameInput] = useState("");
   const [noteTitleInput, setNoteTitleInput] = useState("");
+  const [noteCreateFolderId, setNoteCreateFolderId] = useState(null);
   const [noteContentInput, setNoteContentInput] = useState("");
   const [renameInput, setRenameInput] = useState("");
   const [renameChatId, setRenameChatId] = useState(null);
@@ -1447,6 +1448,11 @@ const DashboardLayout = () => {
     setShowNoteColorPopover(false);
   };
 
+  const openCreateNote = (folderId = null) => {
+    setNoteCreateFolderId(folderId ?? null);
+    setNoteCreateModalOpen(true);
+  };
+
   const handleSaveNoteEditor = async () => {
     if (!noteEditorId) return;
 
@@ -1497,9 +1503,9 @@ const DashboardLayout = () => {
 
   const handleCreateNote = async () => {
     if (!noteTitleInput.trim()) return;
-    const defaultFolderId = null; // do not auto-assign a folder
+    const targetFolderId = noteCreateFolderId ?? null;
     const defaultColor =
-      folders.find((f) => f.id === defaultFolderId)?.color || folderColors[0];
+      folders.find((f) => f.id === targetFolderId)?.color || folderColors[0];
     
     try {
       // Prepare note content - if it's a manual note without AI responses, just use plain text
@@ -1509,7 +1515,7 @@ const DashboardLayout = () => {
       const dbNote = await apiCreateNote({
         title: noteTitleInput.trim(),
         content: noteContent,
-        folderId: defaultFolderId,
+        folderId: targetFolderId,
         color: defaultColor,
       });
 
@@ -1521,7 +1527,7 @@ const DashboardLayout = () => {
         title: dbNote.title,
         content: dbNote.content || "",
         preview: buildPreview(noteContent || noteTitleInput),
-        folderId: dbNote.note_folder_id,
+        folderId: dbNote.note_folder_id ?? dbNote.folder_id ?? targetFolderId,
         chatId: sourceChatId,
         messageId: sourceMessageId,
         color: dbNote.color || defaultColor,
@@ -1533,6 +1539,7 @@ const DashboardLayout = () => {
       setNoteTitleInput("");
       setNoteContentInput("");
       setNoteCreateModalOpen(false);
+      setNoteCreateFolderId(null);
       openNoteEditor(newNote);
     } catch (err) {
       console.error("Failed to create note:", err);
@@ -2448,7 +2455,7 @@ const DashboardLayout = () => {
               folderSelectionMode={folderSelectionMode}
               selectedFolderIds={selectedFolderIds}
               onCreateFolderClick={() => setFolderModalOpen(true)}
-              onCreateNoteClick={() => setNoteCreateModalOpen(true)}
+              onCreateNoteClick={() => openCreateNote(notesViewMode === "folders" ? activeFolder?.id ?? null : null)}
               onStartFolderSelection={handleStartFolderSelection}
               onToggleFolderSelectItem={handleToggleFolderSelectItem}
               onFoldersBulkPin={handleFoldersBulkPin}
@@ -2587,6 +2594,7 @@ const DashboardLayout = () => {
                 onDeleteNoteSingle={handleDeleteNoteSingle}
                 onOpenMoveNoteModal={openMoveNoteModal}
                 onOpenAddNotesToFolder={handleOpenAddNotesToFolder}
+                onCreateNoteInFolder={openCreateNote}
                 onShowNoteInChats={handleShowNoteInChats}
                 activeChatIds={activeChatIds}
                 folders={folders}

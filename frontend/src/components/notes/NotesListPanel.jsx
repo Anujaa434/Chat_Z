@@ -22,6 +22,7 @@ const NotesListPanel = ({
   onOpenAddNotesToFolder,
   onShowNoteInChats,
   activeChatIds,
+  onCreateNoteInFolder,
 }) => {
   const notesListRef = useRef(null);
 
@@ -88,7 +89,11 @@ const NotesListPanel = ({
               <button
                 type="button"
                 className="empty-cta"
-                onClick={() => onOpenAddNotesToFolder(activeFolder.id)}
+                onClick={() =>
+                  onCreateNoteInFolder
+                    ? onCreateNoteInFolder(activeFolder.id)
+                    : onOpenAddNotesToFolder(activeFolder.id)
+                }
               >
                 Create your first note
               </button>
